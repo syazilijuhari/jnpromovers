@@ -28,7 +28,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboards.admin.employee_add');
     }
 
     /**
@@ -84,6 +84,9 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employees = User::findOrFail($id);
+        $employees->delete();
+
+        return back()->with('success', 'Employee is successfully deleted');
     }
 }

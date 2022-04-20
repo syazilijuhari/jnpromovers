@@ -3,7 +3,7 @@
 @section('title','Customer')
 
 @section('content')
-{{--    Message--}}
+    {{--Message--}}
     @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -34,14 +34,12 @@
                     <td>{{$customer->phone}}</td>
                     <td>{{$customer->email}}</td>
                     <td>
-                        <!-- Call to action buttons -->
-
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
-                                </li>
-                            </ul>
-                        </form>
+                    <!-- Call to action buttons -->
+                        <ul class="list-inline m-0">
+                            <li class="list-inline-item">
+                                <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                            </li>
+                        </ul>
                     </td>
                 </tr>
                 @endforeach
@@ -55,7 +53,7 @@
             </div>
         </div>
     </div>
-{{-- DELETE confirmation modal --}}
+    {{-- DELETE confirmation modal --}}
     <div class="modal fade" id="Delete" data-backdrop="static" data-keyboard="false" tabindex="-1"
          aria-labelledby="DeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
