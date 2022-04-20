@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -14,6 +15,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+
+        $employees = User::where('role', 'employee')->orderBy('created_at','asc')->paginate(3);
+        return view('dashboards.admin.employee', compact('employees'));
 
     }
 

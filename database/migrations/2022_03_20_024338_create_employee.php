@@ -18,6 +18,7 @@ class CreateEmployee extends Migration
             $table->foreign('user_id')->references('user_id')->on('users');
             $table->string('name');
             $table->string('phone');
+            $table->string('email');
             $table->timestamps();
         });
     }

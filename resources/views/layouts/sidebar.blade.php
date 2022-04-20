@@ -78,8 +78,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href=""
-                                   class="nav-link ">
+                                <a href="{{ route("admin.employee.index") }}"
+                                   class="nav-link {{ (request()->routeIs('admin.employee') ? 'active' : '') }}">
                                     <i class="fas fa-id-badge mr-2"></i>
                                     <p class="">Employee</p>
                                 </a>

@@ -1,19 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\AdvertisementController;
-use App\Http\Controllers\Advertiser\AdvertiserController;
+//use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\OrgRegisterController;
 use App\Http\Controllers\Customer\CustomerController;
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SendEmailController;
-use App\Http\Controllers\Organizer\OrganizerController;
-use App\Http\Controllers\Payment\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -57,12 +51,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
 
     //Customer Dashboard
     Route::resource('customer', \App\Http\Controllers\Admin\CustomerController::class);
+
 //    Route::get('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customer'); //route index untuk show all
 //    Route::post('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'store'])->name('customer'); //store customer (lepas tekan submit button)
 //    Route::get('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'show'])->name('customer'); //get individual customer info
 //    Route::get('customer/{uid}/edit', [\App\Http\Controllers\Admin\CustomerController::class, 'edit'])->name('customer'); //show edit form for individual customer info
 //    Route::put('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'update'])->name('customer'); //update individual customer info (lepas tekan submit button)
 //    Route::delete('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'delete'])->name('customer'); //delete
+
+    //Employee Dashboard
+    Route::resource('employee', \App\Http\Controllers\Admin\EmployeeController::class);
+
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');
 });

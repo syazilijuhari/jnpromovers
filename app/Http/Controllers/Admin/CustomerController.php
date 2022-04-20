@@ -15,45 +15,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::where('role', 'customer')->get();
+        $customers = User::where('role', 'customer')->orderBy('created_at','asc')->paginate(3);;
 
         return view('dashboards.admin.customer', compact('customers'));
-    }
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -64,6 +28,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $customers = User::findOrFail($id);
+        $customers->delete();
+
+        return back()->with('success', 'Customer is successfully deleted');
     }
 }
