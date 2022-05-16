@@ -62,6 +62,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
     //Employee Dashboard
     Route::resource('employee', \App\Http\Controllers\Admin\EmployeeController::class);
 
+    //Info Details Dashboard
+    Route::resource('infodetails', \App\Http\Controllers\Admin\InfoController::class);
+
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');
 });

@@ -39,7 +39,23 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:users',
+            'phone' => 'required',
+            'email' => 'required|unique:users'
+        ]);
+
+        $users = new User();
+        $users->name = $request->name;
+        $users->phone = $request->phone;
+        $users->email = $request->email;
+        $users->role = 'employee';
+        if ($users -> save()) {
+            return redirect('/admin/employee')->with('success', 'Employee is successfully created');
+        }
+        else {
+            return redirect()->back()->with('error', 'Employee is failed to create');
+        }
     }
 
     /**
@@ -61,7 +77,8 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = User::findOrFail($id);
+        return view('dashboards.admin.employee_edit', compact('employee'));
     }
 
     /**
@@ -73,7 +90,19 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required'
+        ]);
+
+        $employee = User::findOrFail($id);
+        $employee->name = $request->name;
+        $employee->phone = $request->phone;
+        $employee->email = $request->email;
+        $employee->save();
+
+        return redirect('/admin/employee')->with('success', 'Employee is successfully updated');
     }
 
     /**

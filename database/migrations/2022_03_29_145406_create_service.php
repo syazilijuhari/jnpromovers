@@ -14,10 +14,9 @@ class CreateService extends Migration
     public function up()
     {
         Schema::create('service', function (Blueprint $table) {
-            $table->string('service_title', 255);
-            $table->string('service_desc', 255);
-            $table->string('transport_title', 255);
-            $table->string('transport_desc', 255);
+            $table->string('title', 255)->unique();
+            $table->enum('category', ['service', 'transport']);
+            $table->string('description', 255);
             $table->timestamps();
         });
     }

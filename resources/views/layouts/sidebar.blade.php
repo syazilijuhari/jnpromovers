@@ -86,8 +86,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href=""
-                                   class="nav-link ">
+                                <a href="{{ route("admin.infodetails.index") }}"
+                                   class="nav-link {{ (request()->routeIs('admin.infodetails') ? 'active' : '') }}">
                                     <i class="fas fa-info-circle mr-2"></i>
                                     <p class="">Info Details</p>
                                 </a>

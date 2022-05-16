@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Employee')
+@section('title','Info Details')
 
 @section('content')
     {{--Message--}}
@@ -13,32 +13,28 @@
 
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title">Employee</h3>
+            <h3 class="card-title">Service</h3>
         </div>
 
         <div class="card-body table-responsive p-0">
             <table class="table table-striped table-valign-middle">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Phone No</th>
-                    <th>Email</th>
+                    <th>Title</th>
+                    <th>Category</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($employees as $employee)
+                @foreach($services as $service)
                     <tr>
-                        <td>{{$employee->user_id}}</td>
-                        <td>{{$employee->name}}</td>
-                        <td>{{$employee->phone}}</td>
-                        <td>{{$employee->email}}</td>
+                        <td>{{$service}}</td>
+                        <td></td>
                         <td>
                             <!-- Call to action buttons -->
                             <ul class="list-inline m-0">
                                 <li class="list-inline-item">
-                                    <a class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" href="{{route('admin.employee.edit', $employee->user_id)}}" title="Edit"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" href="" title="Edit"><i class="fa fa-edit"></i></a>
                                 </li>
                                 <li class="list-inline-item">
                                     <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
@@ -46,15 +42,13 @@
                             </ul>
                         </td>
                     </tr>
-                @endforeach
                 </tbody>
             </table>
         </div>
         <div class="card-footer clearfix">
-            <a href="{{route('admin.employee.create')}}" class="btn btn-sm btn-info float-left" style="margin-top:5px">Add New Employee</a>
+            <a href="" class="btn btn-sm btn-info float-left" style="margin-top:5px">Add New Service</a>
             {{-- Pagination --}}
             <div class="d-flex justify-content-end">
-                {{ $employees->links() }}
             </div>
         </div>
     </div>
@@ -74,7 +68,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <form action="{{ route('admin.employee.destroy', $employee->user_id)}}" method="post">
+                    <form action="" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" id="btnDelete" value="delete" name="type"
