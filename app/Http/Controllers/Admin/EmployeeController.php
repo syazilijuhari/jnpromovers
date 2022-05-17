@@ -40,9 +40,9 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:users',
+            'name' => 'required',
             'phone' => 'required',
-            'email' => 'required|unique:users'
+            'email' => 'required'
         ]);
 
         $users = new User();
@@ -54,7 +54,7 @@ class EmployeeController extends Controller
             return redirect('/admin/employee')->with('success', 'Employee is successfully created');
         }
         else {
-            return redirect()->back()->with('error', 'Employee is failed to create');
+            return back()->with('error', 'Employee is failed to create');
         }
     }
 
@@ -111,11 +111,12 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $employees = User::findOrFail($id);
+        $employeeId = $request->input('oldid');
+        $employees = User::findOrFail($employeeId);
         $employees->delete();
 
-        return back()->with('success', 'Employee is successfully deleted');
+        return redirect()->route('admin.employee.index')->with('success', 'Employee is successfully deleted');
     }
 }

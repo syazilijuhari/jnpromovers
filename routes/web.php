@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 //use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\InfoController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\HomeController;
@@ -50,7 +51,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     //Customer Dashboard
-    Route::resource('customer', \App\Http\Controllers\Admin\CustomerController::class);
+    Route::resource('customer', \App\Http\Controllers\Admin\CustomerController::class)->except(['destroy']);
+    Route::delete('customer/delete', [\App\Http\Controllers\Admin\CustomerController::class, 'destroy'])->name('customer.delete');
+
 
 //    Route::get('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customer'); //route index untuk show all
 //    Route::post('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'store'])->name('customer'); //store customer (lepas tekan submit button)
@@ -60,10 +63,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
 //    Route::delete('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'delete'])->name('customer'); //delete
 
     //Employee Dashboard
-    Route::resource('employee', \App\Http\Controllers\Admin\EmployeeController::class);
+    Route::resource('employee', \App\Http\Controllers\Admin\EmployeeController::class)->except(['destroy']);
+    Route::delete('employee/delete', [\App\Http\Controllers\Admin\EmployeeController::class, 'destroy'])->name('employee.delete');
 
     //Info Details Dashboard
-    Route::resource('infodetails', \App\Http\Controllers\Admin\InfoController::class);
+    Route::resource('infodetails', \App\Http\Controllers\Admin\InfoController::class)->except(['destroy']);
+    Route::delete('infodetails/delete', [InfoController::class, 'destroy'])->name('infodetails.delete');
 
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');

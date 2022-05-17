@@ -26,12 +26,12 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-
-        $customers = User::findOrFail($id);
+        $customerId = $request->input('oldid');
+        $customers = User::findOrFail($customerId);
         $customers->delete();
 
-        return back()->with('success', 'Customer is successfully deleted');
+        return redirect()->route('admin.customer.index')->with('success', 'Customer is successfully deleted');
     }
 }

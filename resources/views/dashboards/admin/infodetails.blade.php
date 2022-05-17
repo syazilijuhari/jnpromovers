@@ -20,6 +20,7 @@
             <table class="table table-striped table-valign-middle">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Action</th>
@@ -28,8 +29,9 @@
                 <tbody>
                 @foreach($services as $service)
                     <tr>
-                        <td>{{$service}}</td>
-                        <td></td>
+                        <td>{{$service->id}}</td>
+                        <td>{{$service->title}}</td>
+                        <td>{{$service->category}}</td>
                         <td>
                             <!-- Call to action buttons -->
                             <ul class="list-inline m-0">
@@ -37,18 +39,20 @@
                                     <a class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" href="" title="Edit"><i class="fa fa-edit"></i></a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm rounded-0 delete-service" type="submit" data-id="{{$service->id}}" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                                 </li>
                             </ul>
                         </td>
                     </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
         <div class="card-footer clearfix">
-            <a href="" class="btn btn-sm btn-info float-left" style="margin-top:5px">Add New Service</a>
+            <a href="{{route('admin.infodetails.create')}}" class="btn btn-sm btn-info float-left" style="margin-top:5px">Add New Service</a>
             {{-- Pagination --}}
             <div class="d-flex justify-content-end">
+                {{ $services->links() }}
             </div>
         </div>
     </div>
@@ -65,12 +69,14 @@
                 </div>
                 <div class="modal-body">
                     Are you sure you want to delete this?
+                    <span id="del_id"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <form action="" method="post">
+                    <form action="{{ route('admin.infodetails.delete')}}" method="post">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" name="oldid" id="oldid">
                         <button type="submit" id="btnDelete" value="delete" name="type"
                                 class="btn btn-danger shadow-none">Yes</button>
                     </form>
@@ -79,3 +85,13 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        $(document).on("click", ".delete-service", function () {
+            var serviceId = $(this).data('id');
+            $('#oldid').val(serviceId);
+            $('#del_id').text(serviceId);
+            console.log(serviceId)
+        });
+    </script>
+@endpush

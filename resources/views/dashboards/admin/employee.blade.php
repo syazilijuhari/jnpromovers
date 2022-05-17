@@ -41,7 +41,7 @@
                                     <a class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" href="{{route('admin.employee.edit', $employee->user_id)}}" title="Edit"><i class="fa fa-edit"></i></a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm rounded-0 delete-employee" type="submit" data-id="{{$employee->user_id}}" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                                 </li>
                             </ul>
                         </td>
@@ -71,12 +71,14 @@
                 </div>
                 <div class="modal-body">
                     Are you sure you want to delete this?
+                    <span id="del_id"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <form action="{{ route('admin.employee.destroy', $employee->user_id)}}" method="post">
+                    <form action="{{ route('admin.employee.delete')}}" method="post">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" name="oldid" id="oldid">
                         <button type="submit" id="btnDelete" value="delete" name="type"
                                 class="btn btn-danger shadow-none">Yes</button>
                     </form>
@@ -85,3 +87,13 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        $(document).on("click", ".delete-employee", function () {
+            var employeeId = $(this).data('id');
+            $('#oldid').val(employeeId);
+            $('#del_id').text(employeeId);
+            console.log(employeeId)
+        });
+    </script>
+@endpush

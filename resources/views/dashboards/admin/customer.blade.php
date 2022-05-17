@@ -37,7 +37,7 @@
                     <!-- Call to action buttons -->
                         <ul class="list-inline m-0">
                             <li class="list-inline-item">
-                                <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-danger btn-sm rounded-0 delete-customer" type="submit" data-id="{{$customer->user_id}}" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                             </li>
                         </ul>
                     </td>
@@ -66,12 +66,14 @@
                 </div>
                 <div class="modal-body">
                     Are you sure you want to delete this?
+                    <span id="del_id"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <form action="{{ route('admin.customer.destroy', $customer->user_id)}}" method="post">
+                    <form action="{{ route('admin.customer.delete')}}" method="post">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" id="oldid" name="oldid">
                         <button type="submit" id="btnDelete" value="delete" name="type"
                                 class="btn btn-danger shadow-none">Yes</button>
                     </form>
@@ -80,3 +82,13 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        $(document).on("click", ".delete-customer", function () {
+            var customerId = $(this).data('id');
+            $('#oldid').val(customerId);
+            $('#del_id').text(customerId);
+            console.log(customerId)
+        });
+    </script>
+@endpush

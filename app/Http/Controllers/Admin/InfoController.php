@@ -16,7 +16,7 @@ class InfoController extends Controller
      */
     public function index()
     {
-        $services = DB::table('service')->orderBy('created_at','asc')->paginate(3);
+        $services = DB::table('services')->orderBy('created_at','asc')->paginate(3);
         return view('dashboards.admin.infodetails', compact('services'));
     }
 
@@ -27,7 +27,7 @@ class InfoController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboards.admin.infodetails_add');
     }
 
     /**
@@ -38,7 +38,22 @@ class InfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'desc' => 'required'
+        ]);
+
+        $services = new Service();
+        $services->title = $request->title;
+        $services->category = $request->category;
+        $services->description = $request->desc;
+        if ($services -> save()) {
+            return redirect('/admin/infodetails')->with('success', 'Service is successfully created');
+        }
+        else {
+            return back()->with('error', 'Service is failed to create');
+        }
     }
 
     /**
@@ -81,8 +96,12 @@ class InfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $serviceId = $request->input('oldid');
+        $services = Service::findOrFail($serviceId);
+        $services->delete();
+
+        return back()->with('success', 'Service is successfully deleted');
     }
 }

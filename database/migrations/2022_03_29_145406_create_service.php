@@ -13,8 +13,9 @@ class CreateService extends Migration
      */
     public function up()
     {
-        Schema::create('service', function (Blueprint $table) {
-            $table->string('title', 255)->unique();
+        Schema::create('services', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->string('title', 255);
             $table->enum('category', ['service', 'transport']);
             $table->string('description', 255);
             $table->timestamps();
@@ -28,6 +29,6 @@ class CreateService extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service');
+        Schema::dropIfExists('services');
     }
 }

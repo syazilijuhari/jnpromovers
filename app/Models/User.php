@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -63,8 +62,17 @@ class User extends Authenticatable
                         if ($latest != null && $latest->exists()) {
                             $uid = random_int(101, 999);
                         }
-                        $user->user_id = ($user->role !== 'admin' ? 'C' : 'A').$uid;
 
+                        if ($user->role == 'admin') {
+                            $user->user_id = 'A' . $uid;
+                        }
+                        elseif ($user->role == 'customer') {
+                            $user->user_id = 'C' . $uid;
+                        }
+                        elseif ($user->role == 'employee') {
+                            $user->user_id = 'E' . $uid;
+                        }
+//                        $user->user_id = ($user->role !== 'admin' ? 'C' : 'A').$uid;
                         break;
 
                     } catch (QueryException $exception) {
