@@ -75,7 +75,8 @@ class InfoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $services = Service::findOrFail($id);
+        return view('dashboards.admin.infodetails_edit', compact('services'));
     }
 
     /**
@@ -87,7 +88,19 @@ class InfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'desc' => 'required'
+        ]);
+
+        $services = Service::findOrFail($id);
+        $services->title = $request->title;
+        $services->category = $request->category;
+        $services->description = $request->desc;
+        $services->save();
+
+        return redirect('/admin/infodetails')->with('success', 'Service is successfully updated');
     }
 
     /**

@@ -35,6 +35,7 @@ Route::middleware(['middleware'=>'PreventBackHistory', 'secure'])->group(functio
 Route::get('/gallery', function(){return view('gallery');})->name('gallery');
 
 //Service
+Route::resource('service', \App\Http\Controllers\ServiceController::class);
 
 //About
 Route::get('/about', function(){return view('about');})->name('about');
@@ -49,6 +50,9 @@ Route::post('/sendemail/send', [SendEmailController::class, 'send'])->name('send
 // Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBackHistory','isAdmin','auth']], function(){
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    //Order Dashboard
+    Route::resource('order', \App\Http\Controllers\Admin\OrderController::class);
 
     //Customer Dashboard
     Route::resource('customer', \App\Http\Controllers\Admin\CustomerController::class)->except(['destroy']);

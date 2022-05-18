@@ -62,7 +62,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href=""
+                                <a href="{{ route("admin.order.index") }}"
                                    class="nav-link ">
                                     <i class="fas fa-list-alt mr-2"></i>
                                     <p class="">Orders</p>

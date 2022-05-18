@@ -21,7 +21,7 @@
                     <a href="{{route('gallery')}}" class="nav-link ">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link ">Service</a>
+                    <a href="{{route('service.index')}}" class="nav-link ">Service</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('about')}}" class="nav-link ">About</a>

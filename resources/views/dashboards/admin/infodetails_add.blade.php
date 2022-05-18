@@ -19,11 +19,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         @csrf
-                        <label for="name">Title</label>
+                        <label for="title">Title</label>
                         <input type="text" name="title" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Category</label>
+                        <label for="category">Category</label>
                         <select class="form-control" name="category">
                             <option disabled selected value="">Select</option>
                             <option value="service">Service</option>
