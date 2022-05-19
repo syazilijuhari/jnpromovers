@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
     //Customer Dashboard
     Route::resource('customer', \App\Http\Controllers\Admin\CustomerController::class)->except(['destroy']);
     Route::delete('customer/delete', [\App\Http\Controllers\Admin\CustomerController::class, 'destroy'])->name('customer.delete');
+    Route::get('export/', [\App\Http\Controllers\Admin\CustomerController::class, 'export'])->name('export');
 
 
 //    Route::get('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customer'); //route index untuk show all
@@ -79,12 +80,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
 });
 
 // Customer
-Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['PreventBackHistory','isCustomer','auth','secure']], function(){
+Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['PreventBackHistory','isCustomer','auth']], function(){
     Route::get('home', [CustomerController::class, 'index'])->name('home');
+
+    //Booking
+    Route::get('booking', [\App\Http\Controllers\Customer\BookingController::class, 'index'])->name('booking');
+
 
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');
 });
+
 
 
 

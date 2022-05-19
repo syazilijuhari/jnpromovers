@@ -31,7 +31,7 @@
                 </li>
             </ul>
 
-            <button class="button-81" role="button">Booking</button>
+            <a href="{{route('customer.booking')}}" class="button-81" role="button">Booking</a>
 
             @auth
                 <ul class="navbar-nav ml-auto">

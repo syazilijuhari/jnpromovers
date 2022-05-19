@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CustomerExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -34,4 +36,10 @@ class CustomerController extends Controller
 
         return redirect()->route('admin.customer.index')->with('success', 'Customer is successfully deleted');
     }
+
+    public function export()
+    {
+        return Excel::download(new CustomerExport,'customers.xlsx');
+    }
+
 }
