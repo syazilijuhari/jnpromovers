@@ -1,0 +1,22 @@
+name: Deploy jnpromovers
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push to Server
+        #uses: actions/checkout@v2
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST_SERVER1}}
+          key: ${{secrets.SSH_KEY_SERVER1}}
+          username: ${{secrets.SSH_USERNAME_SERVER1}}
+          script: |
+            cd /var/www/jnpro
+            git pull
+            composer update
+            php artisan optimize:clear
+            echo 'dah siappp' 
