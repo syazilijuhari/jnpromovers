@@ -12,9 +12,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/map.js') }}" defer></script>
+    {{--    <script src="{{ asset('js/map.js') }}" defer></script>--}}
     <script src="{{ asset('js/email.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,13 +22,13 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    {{-- Icon --}}
+    <link rel="icon" href="{{ asset('img/jnpro-logo.png')}}" type="image/x-icon">
 
     <!-- Styles -->
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- -- Custom CSS File -- -->
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
@@ -37,22 +36,21 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app-login.css') }}">
 
-
-    {{-- Icon --}}
-    <link rel="icon" href="{{ asset('img/jnpro-logo.png')}}" type="image/x-icon">
-
-    {{-- AOS Package --}}
+    <!-- AOS Package -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 </head>
 <body class="layout-top-nav" style="height: auto;">
 <div class="wrapper">
 
-@include('layouts.navbar')
+    @include('layouts.navbar')
 
-<!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
     @if(Request::path() != '/' && Request::path() != 'home')
 
-        <div class="content-wrapper" style="margin-top: 60px">
+        <div class="content-wrapper" style="margin-top: 60px;padding-bottom: 50px;">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container">
@@ -79,7 +77,6 @@
         <!-- /.content-wrapper -->
 
     @else
-
         <div>
             @yield('content')
         </div>
@@ -90,12 +87,7 @@
 
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-{{--    Google Maps API--}}
-<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_Yp6qQiS8G8dQoxeYGol5PB7RBaHeh9s&libraries=places&callback=initMap"
-    async defer>
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
 {{-- AOS JS Package --}}
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
