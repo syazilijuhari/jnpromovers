@@ -24,7 +24,7 @@
                 <a href="{{route('customer.booking-one')}}" type="submit" class="btn btn-danger" style="color: white"><span><i class="fas fa-arrow-left"></i> Back</span></a>
             </div>
             <div class="col-auto">
-                <a href="{{route('customer.booking-two')}}" type="submit" class="btn btn-danger" style="color: white">Next <span><i class="fas fa-arrow-right"></i></span></a>
+                <a href="{{route('customer.booking-three')}}" type="submit" class="btn btn-danger" style="color: white">Next <span><i class="fas fa-arrow-right"></i></span></a>
             </div>
         </form>
     </div>

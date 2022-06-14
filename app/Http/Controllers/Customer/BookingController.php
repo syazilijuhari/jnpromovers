@@ -43,8 +43,22 @@ class BookingController extends Controller
         return redirect()->route('dashboards.customer.booking-two');
     }
 
-    public function createOrderNext() {
+    public function createOrderSec() {
 
         return view('dashboards.customer.booking-two');
+    }
+
+    public function postOrderSec() {
+
+    }
+
+    public function createOrderThird() {
+
+        return view('dashboards.customer.booking-three');
+
+    }
+
+    public  function postOrderThird() {
+
     }
 }

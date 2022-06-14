@@ -87,8 +87,11 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['Pre
     Route::get('booking/first', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderFirst'])->name('booking-one');
     Route::post('booking/first', [\App\Http\Controllers\Customer\BookingController::class, 'postOrderFirst'])->name('booking-one.post');
 
-    Route::get('booking/second', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderNext'])->name('booking-two');
-    Route::post('booking/second', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderNext'])->name('booking-two.post');
+    Route::get('booking/second', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderSec'])->name('booking-two');
+    Route::post('booking/second', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderSec'])->name('booking-two.post');
+
+    Route::get('booking/third', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderThird'])->name('booking-three');
+    Route::post('booking/third', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderThird'])->name('booking-three.post');
 
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');
