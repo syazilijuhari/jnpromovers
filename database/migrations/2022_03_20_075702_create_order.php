@@ -17,8 +17,8 @@ class CreateOrder extends Migration
             $table->string('order_id')->primary();
             $table->string('name');
             $table->foreign('name')->references('name')->on('users');
-            $table->date('booking_date');
-            $table->time('booking_time');
+            $table->string('package');
+            $table->dateTime('booking_datetime');
             $table->string('address_from', 255);
             $table->string('address_to', 255);
             $table->string('vehicle_type');

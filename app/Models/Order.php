@@ -15,6 +15,7 @@ class Order extends Model
     protected $fillable = [
         'order_id',
         'name',
+        'package',
         'booking_date',
         'booking time',
         'address_from',

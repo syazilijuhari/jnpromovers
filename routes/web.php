@@ -84,7 +84,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['Pre
     Route::get('home', [CustomerController::class, 'index'])->name('home');
 
     //Booking
-    Route::get('booking', [\App\Http\Controllers\Customer\BookingController::class, 'index'])->name('booking');
+    Route::get('booking-one', [\App\Http\Controllers\Customer\BookingController::class, 'index'])->name('booking-one');
 
 
     // Logout
