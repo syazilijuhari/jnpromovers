@@ -84,8 +84,11 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['Pre
     Route::get('home', [CustomerController::class, 'index'])->name('home');
 
     //Booking
-    Route::get('booking-one', [\App\Http\Controllers\Customer\BookingController::class, 'index'])->name('booking-one');
+    Route::get('booking/first', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderFirst'])->name('booking-one');
+    Route::post('booking/first', [\App\Http\Controllers\Customer\BookingController::class, 'postOrderFirst'])->name('booking-one.post');
 
+    Route::get('booking/second', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderNext'])->name('booking-two');
+    Route::post('booking/second', [\App\Http\Controllers\Customer\BookingController::class, 'createOrderNext'])->name('booking-two.post');
 
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');

@@ -61,14 +61,13 @@
         </div>
     </div>
 
-
     <div class="container">
         <form class="row g-3">
             <div class="col-md-2">
                 <input type="text" class="form-control" disabled style="background-color: white; border: black;">
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-danger" >Next <span><i class="fas fa-arrow-right"></i></span></button>
+                <a href="{{route('customer.booking-two')}}" type="submit" class="btn btn-danger" style="color: white">Next <span><i class="fas fa-arrow-right"></i></span></a>
             </div>
         </form>
     </div>
