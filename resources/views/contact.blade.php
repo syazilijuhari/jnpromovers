@@ -12,7 +12,7 @@
                         style="border:0"
                         loading="lazy"
                         allowfullscreen
-                        src="https://www.google.com/maps/embed/v1/place?q=jn%20pro%20services&key=AIzaSyB3ZZcF07Fh1N00p_SHPQ8YNnC6iOngNnQ">
+                        src="https://www.google.com/maps/embed/v1/place?q=jn%20pro%20services&key=AIzaSyDGEaX9QU66LsFmVsPR0UzBmt1ex2CwrsU">
                 </iframe>
             </div>
             <div class="col-md-6">
