@@ -3,7 +3,9 @@
 @section('title', 'Booking')
 
 @section('content')
+
     <div class="container-fluid p-md-0">
+
         <section id="datetime">
             <h3 style="font-weight: 700">Select Date & Time</h3>
             <div class="col-md-6">
@@ -44,7 +46,7 @@
         </section>
     </div>
 
-    <section id="actions" class="mt-5">
+    <section id="actions" class="m-3">
         <div class="d-flex align-content-end justify-content-between">
             <div>
                 <a href="{{route('customer.booking-one')}}" type="submit" class="btn btn-danger"
@@ -55,7 +57,7 @@
                     <input type="text" class="form-control" disabled style="background-color: white; border: black;" />
                 </div>
                 <div>
-                    <a href="{{route('customer.booking-two')}}" type="submit" class="btn btn-danger" style="color: white">Next <span><i class="fas fa-arrow-right"></i></span></a>
+                    <a href="{{route('customer.booking-three')}}" type="submit" class="btn btn-danger" style="color: white">Next <span><i class="fas fa-arrow-right"></i></span></a>
                 </div>
             </div>
         </div>
