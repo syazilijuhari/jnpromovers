@@ -31,6 +31,24 @@
         </div>
     </section>
 
+    <section id="notes">
+        <h3 style="font-weight: 700">Notes</h3>
+        <div class="content booking-notes">
+            <div class="container col-md-6 mt-4 mb-3 ml-0">
+                <textarea class="form-control" name="notes" rows="3"></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="photos">
+        <h3 style="font-weight: 700">Upload photo(s) of your item(s)</h3>
+        <div class="container col-md-6 mt-4 mb-3 ml-0">
+            <div class="content booking-photos">
+                <input class="form-control" type="file" name="photos" id="formFileMultiple" multiple>
+            </div>
+        </div>
+    </section>
+
     <section id="actions" class="m-3">
         <div class="d-flex align-content-end justify-content-between">
             <div>

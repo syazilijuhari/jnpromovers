@@ -23,12 +23,12 @@
             <div class="container">
                 <div class="mb-3">
                     <label for="mapFrom" class="form-label">From</label>
-                    <input type="text" class="form-control" id="mapFrom" placeholder="From">
+                    <input type="text" class="form-control" id="mapFrom" placeholder="Enter pickup address">
                 </div>
 
                 <div class="mb-3">
                     <label for="mapTo" class="form-label">To</label>
-                    <input type="text" class="form-control" id="mapTo">
+                    <input type="text" class="form-control" id="mapTo" placeholder="Enter dropoff address">
                 </div>
 
                 <div class="card mb-3">
@@ -111,7 +111,7 @@
             let destFrom, destTo;
 
             const map = new google.maps.Map(document.getElementById("map-booking"), {
-                zoom: 7,
+                zoom: 8,
                 center: klCenterPoint,
                 disableDefaultUI: true,
                 restriction: {
