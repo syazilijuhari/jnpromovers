@@ -9,6 +9,8 @@ use Illuminate\Database\QueryException;
 class Order extends Model
 {
     use HasFactory;
+
+    protected $table = 'order';
     protected $primaryKey = 'order_id';
     public $incrementing = false;
 
@@ -19,6 +21,13 @@ class Order extends Model
         'booking_datetime',
         'address_from',
         'address_to',
+
+        // Location
+        'fromLat',
+        'fromLong',
+        'toLat',
+        'toLong',
+
         'vehicle_type',
         'extra_service',
         'note',

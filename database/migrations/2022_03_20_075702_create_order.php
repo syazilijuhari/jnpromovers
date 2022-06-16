@@ -19,8 +19,15 @@ class CreateOrder extends Migration
             $table->foreign('name')->references('name')->on('users');
             $table->string('package');
             $table->dateTime('booking_datetime');
+            // Location
+            $table->decimal('fromLat', 11, 8);
+            $table->decimal('fromLong', 11, 8);
+            $table->decimal('toLat', 11, 8);
+            $table->decimal('toLong', 11, 8);
+            // Address
             $table->string('address_from', 255);
             $table->string('address_to', 255);
+            
             $table->string('vehicle_type');
             $table->string('extra_service');
             $table->text('note');

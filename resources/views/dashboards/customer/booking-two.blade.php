@@ -5,6 +5,12 @@
 @section('content')
     <form action="{{route('customer.booking-two.post')}}" method="post">
         @csrf
+
+        <input type="hidden" name="fromLat" @if($order->fromLat) value="{{ $order->fromLat }}" @endif />
+        <input type="hidden" name="fromLong" @if($order->fromLong) value="{{ $order->fromLong }}" @endif />
+        <input type="hidden" name="toLat" @if($order->toLat) value="{{ $order->toLat }}" @endif />
+        <input type="hidden" name="toLong" @if($order->toLong) value="{{ $order->toLong }}" @endif />
+
         <div class="container-fluid p-md-0">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -68,7 +74,7 @@
                     <div class="mr-3">
                         <div class="input-group mb-3">
                             <span class="input-group-text">RM</span>
-                            <input type="text" class="form-control" id="price" name="price" value="{{$order->price}}" readonly style="background-color: white">
+                            <input type="text" class="form-control" id="price" name="price" value="{{$price}}" readonly style="background-color: white">
                         </div>
                     </div>
                     <div>
@@ -110,7 +116,7 @@
                 // dapatkan value duration in minutes (?) = rows.duration.value
 
                 //console.log(rows);
-                let price = {{$order->price}} + (3*(rows.distance.value/1000));
+                let price = {{$price}} + (3*(rows.distance.value/1000));
                 price = price.toFixed(2)
 
                 // TODO
@@ -154,6 +160,28 @@
             autocompleteFrom.setBounds(MY_BOUNDS);
             autocompleteTo.setBounds(MY_BOUNDS);
 
+            @if ($order->fromLat && $order->fromLong)
+                destFrom = new google.maps.Marker({
+                    map: map,
+                    title: "{!! $order->address_from !!}",
+                    label: "A",
+                    position: new google.maps.LatLng(parseFloat({{$order->fromLat}}),parseFloat({{$order->fromLong}}))
+                })
+            @endif
+
+            @if ($order->toLat && $order->toLong)
+                destTo = new google.maps.Marker({
+                    map: map,
+                    title: "{!! $order->address_to !!}",
+                    label: "B",
+                    position: new google.maps.LatLng(parseFloat({{$order->toLat}}),parseFloat({{$order->toLong}}))
+                })
+            @endif
+
+            @if ($order->fromLat && $order->fromLong && $order->toLat && $order->toLong)
+                calculateDistance(destFrom, destTo);
+            @endif
+
             // FROM
             autocompleteFrom.addListener("place_changed", () => {
                 const place = autocompleteFrom.getPlace();
@@ -172,6 +200,9 @@
                     label: "A",
                     position: place.geometry.location,
                 });
+
+                $("input[name='fromLat']").val(place.geometry.location.lat());
+                $("input[name='fromLong']").val(place.geometry.location.lng());
 
                 if (destFrom && destTo)
                     calculateDistance(destFrom, destTo);
@@ -195,6 +226,9 @@
                     label: "B",
                     position: place.geometry.location,
                 });
+
+                $("input[name='toLat']").val(place.geometry.location.lat());
+                $("input[name='toLong']").val(place.geometry.location.lng());
 
                 if (destFrom && destTo)
                     calculateDistance(destFrom, destTo);
