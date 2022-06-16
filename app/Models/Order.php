@@ -33,9 +33,6 @@ class Order extends Model
         'note',
         'photo',
         'price',
-        'payment_method',
-        'transaction_id',
-        'payment_status'
     ];
 
     protected $casts = [

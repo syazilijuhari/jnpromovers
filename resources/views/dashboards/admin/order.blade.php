@@ -13,7 +13,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Date</th>
+                    <th>Date Created</th>
+                    <th>Package</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -22,8 +23,8 @@
                     <tr>
                         <td>{{$order->order_id}}</td>
                         <td>{{$order->name}}</td>
-                        <td>{{$order->booking_date}}</td>
-                        <td></td>
+                        <td>{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}</td>
+                        <td>{{$order->package}}</td>
                         <td>
                             <!-- Call to action buttons -->
                             <ul class="list-inline m-0">

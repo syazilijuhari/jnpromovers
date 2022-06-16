@@ -17,6 +17,8 @@ class CreateOrder extends Migration
             $table->string('order_id')->primary();
             $table->string('name');
             $table->foreign('name')->references('name')->on('users');
+            $table->string('email');
+            $table->string('phone');
             $table->string('package');
             $table->dateTime('booking_datetime');
             // Location
@@ -33,9 +35,6 @@ class CreateOrder extends Migration
             $table->text('note')->nullable();
             $table->string('photo', 255);
             $table->decimal('price', 10,2);
-            $table->string('payment_method')->nullable();
-            $table->string('transaction_id')->nullable();
-            $table->string('payment_status')->nullable();
             $table->timestamps();
         });
     }

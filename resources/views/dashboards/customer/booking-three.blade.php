@@ -24,7 +24,7 @@
                                 <input type="checkbox" class="btn-check btn-services btn-lg" name="extra_service[]"
                                        id="dismantle"
                                        autocomplete="off"
-                                       value="Dismantle" {{ (in_array('Dismantle', $order->extra_service)) ? 'checked' : ''}}/>
+                                       value="Dismantle" {{ ($order->extra_service && in_array('Dismantle', $order->extra_service)) ? 'checked' : ''}}/>
                                 <label class="btn btn-outline-danger btn-services btn-lg"
                                        for="dismantle">Dismantle</label>
                             </div>
@@ -33,7 +33,7 @@
                                 <input type="checkbox" class="btn-check btn-services btn-lg" name="extra_service[]"
                                        id="wrapping"
                                        autocomplete="off"
-                                       value="Wrapping" {{ (in_array('Wrapping', $order->extra_service)) ? 'checked' : ''}} />
+                                       value="Wrapping" {{ ($order->extra_service && in_array('Wrapping', $order->extra_service)) ? 'checked' : ''}} />
                                 <label class="btn btn-outline-danger btn-services btn-lg"
                                        for="wrapping">Wrapping</label>
                             </div>
@@ -42,7 +42,7 @@
                                 <input type="checkbox" class="btn-check btn-services btn-lg" name="extra_service[]"
                                        id="boxes"
                                        autocomplete="off"
-                                       value="Boxes" {{ (in_array('Boxes', $order->extra_service)) ? 'checked' : ''}} />
+                                       value="Boxes" {{ ($order->extra_service && in_array('Boxes', $order->extra_service)) ? 'checked' : ''}} />
                                 <label class="btn btn-outline-danger btn-services btn-lg" for="boxes">Boxes</label>
                             </div>
                             <div class="col-auto">
@@ -71,8 +71,9 @@
                 <h3 style="font-weight: 700">Upload photo(s) of your item(s)</h3>
                 <div class="container col-md-6 mt-4 mb-3 ml-0">
                     <div class="content booking-photos">
-                        <input class="form-control" type="file" name="fileToUpload" accept="images/*" id="inputImage" multiple
-                               value="{{$order->photo}}" />
+                        <input class="form-control" type="file" name="fileToUpload" accept="images/*" id="inputImage"
+                               multiple
+                               value="{{$order->photo}}"/>
                     </div>
                 </div>
             </section>

@@ -96,6 +96,10 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['Pre
     Route::get('booking/review', [\App\Http\Controllers\Customer\BookingController::class, 'orderReview'])->name('booking-review');
     Route::post('booking/review', [\App\Http\Controllers\Customer\BookingController::class, 'postOrderReview'])->name('booking-review.post');
 
+    Route::get('booking/details', [\App\Http\Controllers\Customer\BookingController::class, 'index'])->name('booking-details');
+
+    Route::get('booking/invoice', [\App\Http\Controllers\Customer\BookingController::class, 'invoice'])->name('booking-invoice');
+
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');
 });

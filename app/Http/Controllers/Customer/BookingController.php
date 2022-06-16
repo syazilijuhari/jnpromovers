@@ -13,7 +13,7 @@ class BookingController extends Controller
     {
         $orders = Order::all();
 
-        return view('booking_details', compact('orders'));
+        return view('dashboards.customer.booking-details', compact('orders'));
     }
 
     public function createOrderFirst(Request $request)
@@ -143,10 +143,18 @@ class BookingController extends Controller
     {
         $order = $request->session()->get('order');
         $order->name = auth()->user()->name;
+        $order->email = auth()->user()->email;
+        $order->phone = auth()->user()->phone;
         $order->save();
 
         $request->session()->forget('order');
 
         return redirect()->route('customer.booking-details');
+    }
+
+    public function invoice() {
+
+        $orders = Order::all();
+        return view('dashboards.customer.booking-invoice', compact('orders'));
     }
 }

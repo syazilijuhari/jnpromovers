@@ -63,7 +63,7 @@
 
                             <li class="nav-item">
                                 <a href="{{ route("admin.order.index") }}"
-                                   class="nav-link ">
+                                   class="nav-link {{ (request()->routeIs('admin.order.index') ? 'active' : '') }}">
                                     <i class="fas fa-list-alt mr-2"></i>
                                     <p class="">Orders</p>
                                 </a>
@@ -71,7 +71,7 @@
 
                             <li class="nav-item">
                                 <a href="{{ route("admin.customer.index") }}"
-                                   class="nav-link {{ (request()->routeIs('admin.customer') ? 'active' : '') }}">
+                                   class="nav-link {{ (request()->routeIs('admin.customer.index') ? 'active' : '') }}">
                                     <i class="fas fa-user mr-2"></i>
                                     <p class="">Customers</p>
                                 </a>
@@ -79,7 +79,7 @@
 
                             <li class="nav-item">
                                 <a href="{{ route("admin.employee.index") }}"
-                                   class="nav-link {{ (request()->routeIs('admin.employee') ? 'active' : '') }}">
+                                   class="nav-link {{ (request()->routeIs('admin.employee.index') ? 'active' : '') }}">
                                     <i class="fas fa-id-badge mr-2"></i>
                                     <p class="">Employee</p>
                                 </a>
@@ -87,7 +87,7 @@
 
                             <li class="nav-item">
                                 <a href="{{ route("admin.infodetails.index") }}"
-                                   class="nav-link {{ (request()->routeIs('admin.infodetails') ? 'active' : '') }}">
+                                   class="nav-link {{ (request()->routeIs('admin.infodetails.index') ? 'active' : '') }}">
                                     <i class="fas fa-info-circle mr-2"></i>
                                     <p class="">Info Details</p>
                                 </a>
