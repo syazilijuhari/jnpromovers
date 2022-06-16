@@ -11,7 +11,7 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div><br />
+        </div><br/>
     @endif
     <form action="{{ route('admin.employee.store') }}" method="post">
         <div class="col-md-6">

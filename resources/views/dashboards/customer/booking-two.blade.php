@@ -3,65 +3,82 @@
 @section('title', 'Booking')
 
 @section('content')
-
-    <div class="container-fluid p-md-0">
-
-        <section id="datetime">
-            <h3 style="font-weight: 700">Select Date & Time</h3>
-            <div class="col-md-6">
-                <div class="form-group mt-4">
-                    <div class="input-group" id="datetimepicker">
-                        <input type="datetime-local" class="form-control">
+    <form action="{{route('customer.booking-two.post')}}" method="post">
+        @csrf
+        <div class="container-fluid p-md-0">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div><br/>
+            @endif
+            <section id="datetime">
+                <h3 style="font-weight: 700">Select Date & Time</h3>
+                <div class="col-md-6">
+                    <div class="form-group mt-4">
+                        <div class="input-group" id="datetimepicker">
+                            <input type="datetime-local" class="form-control" name="booking_datetime"
+                                   value="{{ \Carbon\Carbon::parse($order->booking_datetime)->format('Y-m-d\TH:i') }}">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="location">
-            <h3 style="font-weight: 700">Map</h3>
+            <section id="location">
+                <h3 style="font-weight: 700">Map</h3>
 
-            <div class="container">
-                <div class="mb-3">
-                    <label for="mapFrom" class="form-label">From</label>
-                    <input type="text" class="form-control" id="mapFrom" placeholder="Enter pickup address">
-                </div>
-
-                <div class="mb-3">
-                    <label for="mapTo" class="form-label">To</label>
-                    <input type="text" class="form-control" id="mapTo" placeholder="Enter dropoff address">
-                </div>
-
-                <div class="card mb-3">
-                    <div class="card-body response-body">
+                <div class="container">
+                    <div class="mb-3">
+                        <label for="mapFrom" class="form-label">From</label>
+                        <input type="text" class="form-control" id="mapFrom" name="address_from"
+                               placeholder="Enter pickup address" value="{{$order->address_from}}">
                     </div>
-                    <div class="card-footer">
-                        <p>Total Distance: <span id="distance"></span></p>
-                        <p>Duration: <span id="duration"></span></p>
+
+                    <div class="mb-3">
+                        <label for="mapTo" class="form-label">To</label>
+                        <input type="text" class="form-control" id="mapTo" name="address_to"
+                               placeholder="Enter dropoff address" value="{{$order->address_to}}">
                     </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body response-body">
+                        </div>
+                        <div class="card-footer">
+                            <p>Total Distance: <span id="distance"></span></p>
+                            <p>Duration: <span id="duration"></span></p>
+                        </div>
+                    </div>
+
+                    <div id="map-booking" style="height: 600px"></div>
                 </div>
 
-                <div id="map-booking" style="height: 600px"></div>
-            </div>
-
-        </section>
-    </div>
-
-    <section id="actions" class="m-3">
-        <div class="d-flex align-content-end justify-content-between">
-            <div>
-                <a href="{{route('customer.booking-one')}}" type="submit" class="btn btn-danger"
-                   style="color: white"><span><i class="fas fa-arrow-left"></i> Back</span></a>
-            </div>
-            <div class="d-flex">
-                <div class="mr-3">
-                    <input type="text" class="form-control" disabled style="background-color: white; border: black;" />
-                </div>
-                <div>
-                    <a href="{{route('customer.booking-three')}}" type="submit" class="btn btn-danger" style="color: white">Next <span><i class="fas fa-arrow-right"></i></span></a>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
+
+        <section id="actions" class="m-3">
+            <div class="d-flex align-content-end justify-content-between">
+                <div>
+                    <a href="{{route('customer.booking-one')}}" type="submit" class="btn btn-danger"
+                       style="color: white"><span><i class="fas fa-arrow-left"></i> Back</span></a>
+                </div>
+                <div class="d-flex">
+                    <div class="mr-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">RM</span>
+                            <input type="text" class="form-control" id="price" name="price" value="{{$order->price}}" readonly style="background-color: white">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-danger"
+                                style="color: white">Next <span><i class="fas fa-arrow-right"></i></span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
 
 @endsection
 
@@ -72,6 +89,7 @@
         const ne = {lat: 7.6667327, lng: 119.5833462};
 
         let geocoder, service;
+
 
         function calculateDistance(from, to) {
             const request = {
@@ -91,11 +109,14 @@
                 // dapatkan value distance in METERS = rows.distance.value
                 // dapatkan value duration in minutes (?) = rows.duration.value
 
-                console.log(rows);
+                //console.log(rows);
+                let price = {{$order->price}} + (3*(rows.distance.value/1000));
+                price = price.toFixed(2)
 
                 // TODO
                 // Ubah masukkan ke dalam input.
                 // pikir sendiri nak masuk dalam input hidden ke or disabled....
+                $("#price").val(price)
                 $("#distance").text(rows.distance.text);
                 $("#duration").text(rows.duration.text);
             });
@@ -125,8 +146,8 @@
 
             const options = {
                 componentRestrictions: {country: ["my", "sg"]},
-                fields: ["address_components", "geometry"],
-                types: ["address"],
+                // fields: ["address_components", "geometry"],
+                // types: ["address"],
             };
             const autocompleteFrom = new google.maps.places.Autocomplete(inputFrom, options);
             const autocompleteTo = new google.maps.places.Autocomplete(inputTo, options);

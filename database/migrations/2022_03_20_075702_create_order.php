@@ -25,6 +25,7 @@ class CreateOrder extends Migration
             $table->string('extra_service');
             $table->text('note');
             $table->string('photo', 255);
+            $table->decimal('price', 10,2);
             $table->string('payment_method');
             $table->string('transaction_id');
             $table->string('payment_status');

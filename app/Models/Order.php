@@ -16,18 +16,22 @@ class Order extends Model
         'order_id',
         'name',
         'package',
-        'booking_date',
-        'booking time',
+        'booking_datetime',
         'address_from',
         'address_to',
         'vehicle_type',
         'extra_service',
         'note',
         'photo',
+        'price',
         'payment_method',
         'transaction_id',
         'payment_status'
     ];
+
+//    protected $casts = [
+//      'booking_datetime' => 'date'
+//    ];
 
     public static function boot() {
         parent::boot();
