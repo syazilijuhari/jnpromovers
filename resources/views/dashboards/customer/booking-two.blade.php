@@ -6,10 +6,10 @@
     <form action="{{route('customer.booking-two.post')}}" method="post">
         @csrf
 
-        <input type="hidden" name="fromLat" value="{{ $order && $order->fromLat }}" />
-        <input type="hidden" name="fromLong" value="{{ $order && $order->fromLong }}" />
-        <input type="hidden" name="toLat" value="{{ $order && $order->toLat }}" />
-        <input type="hidden" name="toLong" value="{{ $order && $order->toLong }}" />
+        <input type="hidden" name="fromLat" @if($order->fromLat) value="{{ $order->fromLat }}" @endif />
+        <input type="hidden" name="fromLong" @if($order->fromLong) value="{{ $order->fromLong }}" @endif />
+        <input type="hidden" name="toLat" @if($order->toLat) value="{{ $order->toLat }}" @endif />
+        <input type="hidden" name="toLong" @if($order->toLong) value="{{ $order->toLong }}" @endif />
 
         <div class="container-fluid p-md-0">
             @if ($errors->any())
