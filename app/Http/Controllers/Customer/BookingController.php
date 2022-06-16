@@ -27,6 +27,7 @@ class BookingController extends Controller
 
     public function postOrderFirst(Request $request)
     {
+        $orders = $request->session()->get('order');
 
         $validatedData = $request->validate([
             'package' => 'required',
@@ -34,29 +35,76 @@ class BookingController extends Controller
             'price' => 'required|numeric'
         ]);
 
-        if (empty($request->session()->get('order'))) {
+        if (empty($orders)) {
             $orders = new Order();
-            $orders->fill($validatedData);
-            $request->session()->put('order', $orders);
-        } else {
-            $orders = $request->session()->get('order');
-            $orders->fill($validatedData);
-            $request->session()->put('order', $orders);
         }
+
+        $orders->fill($validatedData);
+        $request->session()->put('order', $orders);
+        $request->session()->put('price_step1', $validatedData['price']);
+
         return redirect()->route('customer.booking-two');
     }
 
     public function createOrderSec(Request $request)
     {
-
         $order = $request->session()->get('order');
+        $price = $request->session()->get('price_step1');
 
-        return view('dashboards.customer.booking-two', compact('order'));
+        // Kalau tkde step 1, patah balik ke step 1
+        if (empty($order) || empty($price)) {
+            return redirect()->route('customer.booking-one');
+        }
+
+        return view('dashboards.customer.booking-two', compact('order', 'price'));
     }
 
     public function postOrderSec(Request $request)
     {
-        $orders = new Order();
+        $orders = $request->session()->get('order');
+
+        // Kalau tkde step 1, patah balik ke step 1
+        if (empty($orders)) {
+            return redirect()->route('customer.booking-one');
+        }
+
+        $validatedData = $request->validate([
+            'booking_datetime' => 'required',
+            'address_from' => 'required',
+            'address_to' => 'required',
+
+            'fromLat' => 'required',
+            'fromLong' => 'required',
+            'toLat' => 'required',
+            'toLong' => 'required',
+
+            'price' => 'required|numeric',
+
+        ]);
+
+        $orders->fill($validatedData);
+        $request->session()->put('order', $orders);
+        $request->session()->put('price_step2', $orders);
+
+        return redirect()->route('customer.booking-three');
+    }
+
+    public function createOrderThird(Request $request)
+    {
+        $order = $request->session()->get('order');
+        $price = $request->session()->get('price_step2');
+
+        if (empty($order) || empty($price)) {
+            return redirect()->route('customer.booking-two');
+        }
+
+        return view('dashboards.customer.booking-three', compact('order'));
+
+    }
+
+    public function postOrderThird(Request $request)
+    {
+        $orders = $request->session()->get('order');
 
         if ($request->hasFile('fileToUpload')) {
             $request->validate([
@@ -69,38 +117,6 @@ class BookingController extends Controller
 
             $orders->photo = $photoname;
         }
-
-        $validatedData = $request->validate([
-            'booking_datetime' => 'required',
-            'address_from' => 'required',
-            'address_to' => 'required',
-            'price' => 'required|numeric',
-
-        ]);
-
-        if (empty($request->session()->get('order'))) {
-            $orders->fill($validatedData);
-            $request->session()->put('order', $orders);
-        } else {
-            $orders = $request->session()->get('order');
-            $orders->fill($validatedData);
-            $request->session()->put('order', $orders);
-        }
-        return redirect()->route('customer.booking-three');
-
-    }
-
-    public function createOrderThird(Request $request)
-    {
-
-        $order = $request->session()->get('order');
-
-        return view('dashboards.customer.booking-three', compact('order'));
-
-    }
-
-    public function postOrderThird(Request $request)
-    {
 
         $validatedData = $request->validate([
             'extra_service' => 'required',
@@ -118,7 +134,6 @@ class BookingController extends Controller
             $request->session()->put('order', $orders);
 
         } else {
-            $orders = $request->session()->get('order');
             $orders->fill($validatedData);
             $request->session()->put('order', $orders);
         }
