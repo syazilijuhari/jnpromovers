@@ -3,7 +3,7 @@
 @section('title', 'Booking')
 
 @section('content')
-    <form action="{{route('customer.booking-three.post')}}" method="post">
+    <form action="{{route('customer.booking-three.post')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="container-fluid">
             @if ($errors->any())
@@ -24,7 +24,7 @@
                                 <input type="checkbox" class="btn-check btn-services btn-lg" name="extra_service[]"
                                        id="dismantle"
                                        autocomplete="off"
-                                       value="Dismantle" {{($order->extra_service) == 'Dismantle' ? 'checked' : ''}}>
+                                       value="Dismantle" {{ (in_array('Dismantle', $order->extra_service)) ? 'checked' : ''}}/>
                                 <label class="btn btn-outline-danger btn-services btn-lg"
                                        for="dismantle">Dismantle</label>
                             </div>
@@ -33,7 +33,7 @@
                                 <input type="checkbox" class="btn-check btn-services btn-lg" name="extra_service[]"
                                        id="wrapping"
                                        autocomplete="off"
-                                       value="Wrapping" {{($order->extra_service) == 'Wrapping' ? 'checked' : ''}}>
+                                       value="Wrapping" {{ (in_array('Wrapping', $order->extra_service)) ? 'checked' : ''}} />
                                 <label class="btn btn-outline-danger btn-services btn-lg"
                                        for="wrapping">Wrapping</label>
                             </div>
@@ -42,7 +42,7 @@
                                 <input type="checkbox" class="btn-check btn-services btn-lg" name="extra_service[]"
                                        id="boxes"
                                        autocomplete="off"
-                                       value="Boxes" {{($order->extra_service) == 'Boxes' ? 'checked' : ''}}>
+                                       value="Boxes" {{ (in_array('Boxes', $order->extra_service)) ? 'checked' : ''}} />
                                 <label class="btn btn-outline-danger btn-services btn-lg" for="boxes">Boxes</label>
                             </div>
                             <div class="col-auto">
@@ -50,7 +50,8 @@
                                        id="manpower"
                                        autocomplete="off"
                                        value="Manpower" {{($order->extra_service) == 'Manpower' ? 'checked' : ''}}>
-                                <label class="btn btn-outline-danger btn-services btn-lg" for="manpower">Manpower</label>
+                                <label class="btn btn-outline-danger btn-services btn-lg"
+                                       for="manpower">Manpower</label>
                             </div>
                         </div>
                     </div>
@@ -70,7 +71,8 @@
                 <h3 style="font-weight: 700">Upload photo(s) of your item(s)</h3>
                 <div class="container col-md-6 mt-4 mb-3 ml-0">
                     <div class="content booking-photos">
-                        <input class="form-control" type="file" name="photo" accept="images/*" id="inputImage" multiple value="{{$order->photo}}">
+                        <input class="form-control" type="file" name="fileToUpload" accept="images/*" id="inputImage" multiple
+                               value="{{$order->photo}}" />
                     </div>
                 </div>
             </section>
@@ -85,7 +87,8 @@
                         <div class="mr-3">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">RM</span>
-                                <input type="text" class="form-control" id="price" name="price" value="{{$order->price}}" readonly style="background-color: white">
+                                <input type="text" class="form-control" id="price" name="price" value="{{$price}}"
+                                       readonly style="background-color: white">
                             </div>
                         </div>
                         <div>
@@ -116,7 +119,7 @@
 
             // Service
             addService = 0;
-            $(service).each(function() {
+            $(service).each(function () {
 
                 if ($(this).is(':checked')) {
 
@@ -139,7 +142,7 @@
                 }
             });
 
-            let price = addService + {{$order->price}};
+            let price = addService + {{$price}};
             price = price.toFixed(2)
 
             $('#price').val(price);

@@ -27,15 +27,15 @@ class CreateOrder extends Migration
             // Address
             $table->string('address_from', 255);
             $table->string('address_to', 255);
-            
+
             $table->string('vehicle_type');
             $table->string('extra_service');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->string('photo', 255);
             $table->decimal('price', 10,2);
-            $table->string('payment_method');
-            $table->string('transaction_id');
-            $table->string('payment_status');
+            $table->string('payment_method')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->string('payment_status')->nullable();
             $table->timestamps();
         });
     }

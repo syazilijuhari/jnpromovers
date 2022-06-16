@@ -11,7 +11,6 @@ class BookingController extends Controller
 
     public function index()
     {
-
         $orders = Order::all();
 
         return view('booking_details', compact('orders'));
@@ -79,12 +78,11 @@ class BookingController extends Controller
             'toLong' => 'required',
 
             'price' => 'required|numeric',
-
         ]);
 
         $orders->fill($validatedData);
         $request->session()->put('order', $orders);
-        $request->session()->put('price_step2', $orders);
+        $request->session()->put('price_step2', $validatedData['price']);
 
         return redirect()->route('customer.booking-three');
     }
@@ -95,65 +93,56 @@ class BookingController extends Controller
         $price = $request->session()->get('price_step2');
 
         if (empty($order) || empty($price)) {
-            return redirect()->route('customer.booking-two');
+            return redirect()->route('customer.booking-one');
         }
 
-        return view('dashboards.customer.booking-three', compact('order'));
-
+        return view('dashboards.customer.booking-three', compact('order', 'price'));
     }
 
     public function postOrderThird(Request $request)
     {
         $orders = $request->session()->get('order');
 
+        if (empty($orders))
+            return redirect()->route('customer.booking-one');
+
+        $validatedData = $request->validate([
+            'extra_service' => 'required|array',
+            'note' => 'nullable',
+            'fileToUpload' => 'required',
+            'price' => 'required|numeric',
+        ]);
+
         if ($request->hasFile('fileToUpload')) {
             $request->validate([
                 'fileToUpload' => 'mimes:jpeg,jpg,png'
             ]);
 
-            $photo = $request['photo'];
+            $photo = $request->file('fileToUpload');
             $photoname = time() . '.' . $photo->getClientOriginalExtension();
-            $request->fileToUpload->move('img', $photoname);
+            $photo->move('img', $photoname);
 
             $orders->photo = $photoname;
         }
 
-        $validatedData = $request->validate([
-            'extra_service' => 'required',
-            'note' => 'required',
-            'photo' => 'required',
-            'price' => 'required|numeric',
-
-        ]);
-
-        $extraService = $request->input('extra_service');
-
-        if (empty($request->session()->get('order'))) {
-            $orders = new Order();
-            $orders->fill($validatedData);
-            $request->session()->put('order', $orders);
-
-        } else {
-            $orders->fill($validatedData);
-            $request->session()->put('order', $orders);
-        }
-
+        $orders->fill($validatedData);
+        $request->session()->put('order', $orders);
 
         return redirect()->route('customer.booking-review');
-
     }
 
-    public function orderReview(Request $request) {
-
+    public function orderReview(Request $request)
+    {
         $order = $request->session()->get('order');
 
         return view('dashboards.customer.booking-review', compact('order'));
 
     }
 
-    public function postOrderReview(Request $request) {
-
+    public function postOrderReview(Request $request)
+    {
         $order = $request->session()->get('order');
+        $order->name = auth()->user()->name;
         $order->save();
 
         $request->session()->forget('order');

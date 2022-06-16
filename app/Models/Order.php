@@ -38,9 +38,9 @@ class Order extends Model
         'payment_status'
     ];
 
-//    protected $casts = [
-//      'booking_datetime' => 'date'
-//    ];
+    protected $casts = [
+        'extra_service' => 'array'
+    ];
 
     public static function boot() {
         parent::boot();
