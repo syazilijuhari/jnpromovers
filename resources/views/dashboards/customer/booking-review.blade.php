@@ -58,6 +58,12 @@
                             <input type="text" readonly class="form-control-plaintext" id="note" value="{{$order->note}}">
                         </div>
                     </div>
+                    <div class="form-group row m-2">
+                        <label for="note" class="col-sm-2 col-form-label" style="font-weight: bold">Price</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="price" value="{{$order->price}}">
+                        </div>
+                    </div>
                 </section>
 
                 <section id="actions" class="m-3">

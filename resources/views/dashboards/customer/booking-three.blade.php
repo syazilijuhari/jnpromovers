@@ -49,7 +49,7 @@
                                 <input type="checkbox" class="btn-check btn-services btn-lg" name="extra_service[]"
                                        id="manpower"
                                        autocomplete="off"
-                                       value="Boxes" {{($order->extra_service) == 'Manpower' ? 'checked' : ''}}>
+                                       value="Manpower" {{($order->extra_service) == 'Manpower' ? 'checked' : ''}}>
                                 <label class="btn btn-outline-danger btn-services btn-lg" for="manpower">Manpower</label>
                             </div>
                         </div>
@@ -107,25 +107,39 @@
             calculate();
         });
 
-        $(document).on('change', "input[name='extra_service']", calculate);
+        $(document).on('change', "input[name='extra_service[]']", calculate);
+
+        var addService = 0;
 
         function calculate() {
-            const service = $("input[name='extra_service']:checked").val(); // dapatkan checked value
+            var service = $("input[name='extra_service[]']:checked"); // dapatkan checked value
 
-            var multiplier = 0;
+            // Service
+            addService = 0;
+            $(service).each(function() {
 
-            // Package
-            if (service == 'Dismantle')
-                multiplier = 150;
+                if ($(this).is(':checked')) {
 
-            else if (service == 'Wrapping')
-                multiplier = 150;
+                    if ($(this).val() === "Dismantle") {
+                        addService += 150;
+                        console.log($(this).val());
+                    }
 
-            else if (service == 'Boxes')
-                multiplier = 20;
+                    if ($(this).val() === "Wrapping") {
+                        addService += 150;
+                    }
 
+                    if ($(this).val() === "Boxes") {
+                        addService += 20;
+                    }
 
-            let price = multiplier + {{$order->price}};
+                    if ($(this).val() === "Manpower") {
+                        addService += 50;
+                    }
+                }
+            });
+
+            let price = addService + {{$order->price}};
             price = price.toFixed(2)
 
             $('#price').val(price);
