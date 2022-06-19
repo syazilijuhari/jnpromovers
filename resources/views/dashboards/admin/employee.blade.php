@@ -38,10 +38,14 @@
                             <!-- Call to action buttons -->
                             <ul class="list-inline m-0">
                                 <li class="list-inline-item">
-                                    <a class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" href="{{route('admin.employee.edit', $employee->user_id)}}" title="Edit"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                       data-placement="top" href="{{route('admin.employee.edit', $employee->user_id)}}"
+                                       title="Edit"><i class="fa fa-edit"></i></a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0 delete-employee" type="submit" data-id="{{$employee->user_id}}" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm rounded-0 delete-employee" type="submit"
+                                            data-id="{{$employee->user_id}}" data-toggle="modal" data-target="#Delete"
+                                            data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                                 </li>
                             </ul>
                         </td>
@@ -51,7 +55,8 @@
             </table>
         </div>
         <div class="card-footer clearfix">
-            <a href="{{route('admin.employee.create')}}" class="btn btn-sm btn-info float-left" style="margin-top:5px">Add New Employee</a>
+            <a href="{{route('admin.employee.create')}}" class="btn btn-sm btn-info float-left" style="margin-top:5px">Add
+                New Employee</a>
             {{-- Pagination --}}
             <div class="d-flex justify-content-end">
                 {{ $employees->links() }}
@@ -80,7 +85,8 @@
                         @method('DELETE')
                         <input type="hidden" name="oldid" id="oldid">
                         <button type="submit" id="btnDelete" value="delete" name="type"
-                                class="btn btn-danger shadow-none">Yes</button>
+                                class="btn btn-danger shadow-none">Yes
+                        </button>
                     </form>
                 </div>
             </div>
