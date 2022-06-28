@@ -71,9 +71,9 @@
                 <h3 style="font-weight: 700">Upload photo(s) of your item(s)</h3>
                 <div class="container col-md-6 mt-4 mb-3 ml-0">
                     <div class="content booking-photos">
-                        <input class="form-control" type="file" name="fileToUpload" accept="images/*" id="inputImage"
+                        <input class="form-control" type="file" name="fileToUpload[]" accept="images/*" id="inputImage"
                                multiple
-                               value="{{$order->photo}}"/>
+                               value=""/>
                     </div>
                 </div>
             </section>

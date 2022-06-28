@@ -9,10 +9,9 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
 
-    public function index()
+    public function index($order_id)
     {
-        $orders = Order::all();
-
+        $orders = Order::find($order_id);
         return view('dashboards.customer.booking-details', compact('orders'));
     }
 
@@ -101,6 +100,7 @@ class BookingController extends Controller
 
     public function postOrderThird(Request $request)
     {
+        $photos = [];
         $orders = $request->session()->get('order');
 
         if (empty($orders))
@@ -109,21 +109,24 @@ class BookingController extends Controller
         $validatedData = $request->validate([
             'extra_service' => 'required|array',
             'note' => 'nullable',
-            'fileToUpload' => 'required',
+            'fileToUpload' => 'required|array',
             'price' => 'required|numeric',
         ]);
 
         if ($request->hasFile('fileToUpload')) {
             $request->validate([
-                'fileToUpload' => 'mimes:jpeg,jpg,png'
+                'fileToUpload.*' => 'mimes:jpeg,jpg,png'
             ]);
 
-            $photo = $request->file('fileToUpload');
-            $photoname = time() . '.' . $photo->getClientOriginalExtension();
-            $photo->move('img', $photoname);
+            foreach ($request->file('fileToUpload') as $photo) {
+                $photoname = time() . rand(1,100) . '.' . $photo->getClientOriginalExtension();
+                $photo->move('img', $photoname);
+                $photos[] = $photoname;
+            }
 
-            $orders->photo = $photoname;
         }
+
+        $orders->photo = $photos;
 
         $orders->fill($validatedData);
         $request->session()->put('order', $orders);
@@ -147,14 +150,17 @@ class BookingController extends Controller
         $order->phone = auth()->user()->phone;
         $order->save();
 
+        $order_id = Order::findOrFail($order->order_id);
+
         $request->session()->forget('order');
 
-        return redirect()->route('customer.booking-details');
+        return view('dashboards.customer.booking-details', compact('order_id'));
+//        return redirect()->route('customer.booking-details');
     }
 
-    public function invoice() {
+    public function invoice($order_id) {
 
-        $orders = Order::all();
-        return view('dashboards.customer.booking-invoice', compact('orders'));
+        $order = Order::find($order_id);
+        return view('dashboards.customer.booking-invoice', compact('order'));
     }
 }

@@ -3,28 +3,25 @@
 @section('title', 'Invoice')
 
 @section('content')
-    @foreach($orders as $order)
         <div class="card">
             <div class="card-body">
-                <div class="container mb-5 mt-3">
+                <div class="container mb-5 mt-3" >
                     <div class="row d-flex align-items-baseline">
                         <div class="col-xl-3 float-end">
                             <a class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
-                                    class="fas fa-print text-primary"></i> Print</a>
+                                    class="fas fa-print text-primary" onclick="printDiv()"></i> Print</a>
                         </div>
                         <hr>
                     </div>
 
-                    <div class="container">
+                    <div class="container" id="print">
                         <div class="col-md-12">
                             <div class="text-center">
                                 <img src="{{asset('img/jnpro-logo.png')}}" alt="JN Pro Logo" class="img-fluid img"
                                      style="width: 170px; height: 230px">
                                 <h5 style="font-weight: bold; color: #ED1E24">JN Pro Movers</h5>
                             </div>
-
                         </div>
-
 
                         <div class="row">
                             <div class="col-xl-8">
@@ -84,5 +81,21 @@
                 </div>
             </div>
         </div>
-    @endforeach
 @endsection
+
+@push('scripts')
+
+    <script>
+        function printDiv() {
+            var printContents = document.getElementById('print').innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+
+@endpush

@@ -36,7 +36,8 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'extra_service' => 'array'
+        'extra_service' => 'array',
+        'photo' => 'array'
     ];
 
     public static function boot() {

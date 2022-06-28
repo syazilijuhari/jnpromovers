@@ -29,7 +29,9 @@
                             <!-- Call to action buttons -->
                             <ul class="list-inline m-0">
                                 <li class="list-inline-item">
-                                    <button class="btn btn-primary btn-sm rounded-0" type="submit" data-toggle="modal" data-target="#Delete" data-placement="top" title="Delete"><i class="fa fa-info"></i></button>
+                                    <a class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                       data-placement="top" href="{{route('admin.order.show', $order->order_id)}}"
+                                       title="Details"><i class="fa fa-info"></i></a>
                                 </li>
                             </ul>
                         </td>

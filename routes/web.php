@@ -54,18 +54,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
     //Order Dashboard
     Route::resource('order', \App\Http\Controllers\Admin\OrderController::class);
 
+
     //Customer Dashboard
+
+    //Route::get('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customer'); //route index untuk show all
+    //Route::post('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'store'])->name('customer'); //store customer (lepas tekan submit button)
+    //Route::get('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'show'])->name('customer'); //get individual customer info
+    //Route::get('customer/{uid}/edit', [\App\Http\Controllers\Admin\CustomerController::class, 'edit'])->name('customer'); //show edit form for individual customer info
+    //Route::put('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'update'])->name('customer'); //update individual customer info (lepas tekan submit button)
+    //Route::delete('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'delete'])->name('customer'); //delete
+
     Route::resource('customer', \App\Http\Controllers\Admin\CustomerController::class)->except(['destroy']);
     Route::delete('customer/delete', [\App\Http\Controllers\Admin\CustomerController::class, 'destroy'])->name('customer.delete');
     Route::get('export/', [\App\Http\Controllers\Admin\CustomerController::class, 'export'])->name('export');
-
-
-//    Route::get('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customer'); //route index untuk show all
-//    Route::post('customer', [\App\Http\Controllers\Admin\CustomerController::class, 'store'])->name('customer'); //store customer (lepas tekan submit button)
-//    Route::get('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'show'])->name('customer'); //get individual customer info
-//    Route::get('customer/{uid}/edit', [\App\Http\Controllers\Admin\CustomerController::class, 'edit'])->name('customer'); //show edit form for individual customer info
-//    Route::put('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'update'])->name('customer'); //update individual customer info (lepas tekan submit button)
-//    Route::delete('customer/{uid}', [\App\Http\Controllers\Admin\CustomerController::class, 'delete'])->name('customer'); //delete
 
     //Employee Dashboard
     Route::resource('employee', \App\Http\Controllers\Admin\EmployeeController::class)->except(['destroy']);
@@ -98,7 +99,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['Pre
 
     Route::get('booking/details', [\App\Http\Controllers\Customer\BookingController::class, 'index'])->name('booking-details');
 
-    Route::get('booking/invoice', [\App\Http\Controllers\Customer\BookingController::class, 'invoice'])->name('booking-invoice');
+    Route::get('booking/invoice/{order_id?}', [\App\Http\Controllers\Customer\BookingController::class, 'invoice'])->name('booking-invoice');
 
     // Logout
     Route::get('logout', [LogoutController::class, 'perform'])->name('logout');
