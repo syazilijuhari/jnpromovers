@@ -1,6 +1,6 @@
 @extends('layouts.viewer')
 
-@section('title', 'Booking Review')
+@section('title', 'Booking Details')
 
 @section('content')
 

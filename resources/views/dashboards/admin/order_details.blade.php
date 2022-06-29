@@ -109,13 +109,15 @@
                             </button>
                         </div>
 
-                        <form action="" method="">
+                        <form action="{{route('admin.assign',$orders->order_id)}}" method="post">
+                            @csrf
                             <div class="modal-body mt-0">
                                 <div class="mt-3">
                                     <div class="p-2 rounded checkbox-form">
                                         @foreach($employees as $employee)
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" value="{{$employee->user_id}}" name="employee[]"
+                                                <input class="form-check-input" type="checkbox"
+                                                       value="{{$employee->user_id}}" name="employee[]"
                                                        id="flexCheckDefault-1">
                                                 <label class=" employee form-check-label" for="flexCheckDefault-1">
                                                     {{$employee->name}}
@@ -125,11 +127,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer d-flex justify-content-between align-items-center">
+                                <button type="submit" class="btn btn-danger btn-block btn-sm">Send</button>
+                            </div>
                         </form>
-
-                        <div class="modal-footer d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-danger btn-block btn-sm">Send</button>
-                        </div>
                     </div>
                 </div>
             </div>

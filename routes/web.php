@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
 
     //Order Dashboard
     Route::resource('order', \App\Http\Controllers\Admin\OrderController::class);
+    Route::post('/order/{order}/assign', [\App\Http\Controllers\Admin\OrderController::class, 'assign'])->name('assign');
 
 
     //Customer Dashboard

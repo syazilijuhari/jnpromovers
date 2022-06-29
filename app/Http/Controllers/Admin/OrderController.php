@@ -6,12 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function sendMessage() {
-        
+    public function assign(Request $request, $order) {
+
+        $employees_id = $request->only('employee');
+        $employees = User::whereIn('user_id', Arr::flatten($employees_id))->get();
+        dd($employees);
+
+//        1. $employees = array user.
+//        2. create empty array = $phones.
+//        3. foreach list $employees and masukkan no telefon ke array $phones.
+//        4. implode $phones dengan comma (so that dia array tu akan cantum bersama ',' utk jadikan string. eg: '011124,0123123,12321903')
+//        5. send API
+
     }
 
     /**

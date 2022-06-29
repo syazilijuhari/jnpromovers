@@ -49,14 +49,14 @@
                                placeholder="Enter dropoff address" value="{{$order->address_to}}">
                     </div>
 
-                    <div class="card mb-3">
-                        <div class="card-body response-body">
-                        </div>
-                        <div class="card-footer">
-                            <p>Total Distance: <span id="distance"></span></p>
-                            <p>Duration: <span id="duration"></span></p>
-                        </div>
-                    </div>
+{{--                    <div class="card mb-3">--}}
+{{--                        <div class="card-body response-body">--}}
+{{--                        </div>--}}
+{{--                        <div class="card-footer">--}}
+{{--                            <p>Total Distance: <span id="distance"></span></p>--}}
+{{--                            <p>Duration: <span id="duration"></span></p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                     <div id="map-booking" style="height: 600px"></div>
                 </div>
