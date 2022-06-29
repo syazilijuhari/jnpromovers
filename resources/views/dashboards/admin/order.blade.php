@@ -41,6 +41,7 @@
             </table>
         </div>
         <div class="card-footer clearfix">
+            <a href="{{route('admin.order.export')}}" class="btn btn-sm btn-primary float-left" style="margin-top:5px">Export to Excel <i class="fa fa-file-export"></i></a>
             {{-- Pagination --}}
             <div class="d-flex justify-content-end">
                 {{ $orders->links() }}

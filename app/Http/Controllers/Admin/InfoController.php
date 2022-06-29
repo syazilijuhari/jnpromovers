@@ -16,7 +16,7 @@ class InfoController extends Controller
      */
     public function index()
     {
-        $services = DB::table('services')->orderBy('created_at','asc')->paginate(3);
+        $services = DB::table('services')->orderBy('created_at','asc')->paginate(5);
         return view('dashboards.admin.infodetails', compact('services'));
     }
 

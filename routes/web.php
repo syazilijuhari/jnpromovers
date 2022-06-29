@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
     //Order Dashboard
     Route::resource('order', \App\Http\Controllers\Admin\OrderController::class);
     Route::post('/order/{order}/assign', [\App\Http\Controllers\Admin\OrderController::class, 'assign'])->name('assign');
+    Route::get('export/order', [\App\Http\Controllers\Admin\OrderController::class, 'export'])->name('order.export');
 
 
     //Customer Dashboard
@@ -67,7 +68,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['PreventBa
 
     Route::resource('customer', \App\Http\Controllers\Admin\CustomerController::class)->except(['destroy']);
     Route::delete('customer/delete', [\App\Http\Controllers\Admin\CustomerController::class, 'destroy'])->name('customer.delete');
-    Route::get('export/', [\App\Http\Controllers\Admin\CustomerController::class, 'export'])->name('export');
+    Route::get('export/customer', [\App\Http\Controllers\Admin\CustomerController::class, 'export'])->name('customer.export');
 
     //Employee Dashboard
     Route::resource('employee', \App\Http\Controllers\Admin\EmployeeController::class)->except(['destroy']);

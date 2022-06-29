@@ -47,7 +47,7 @@
             </table>
         </div>
         <div class="card-footer clearfix">
-            <a href="{{route('admin.export')}}" class="btn btn-sm btn-primary float-left" style="margin-top:5px">Export to Excel <i class="fa fa-file-export"></i></a>
+            <a href="{{route('admin.customer.export')}}" class="btn btn-sm btn-primary float-left" style="margin-top:5px">Export to Excel <i class="fa fa-file-export"></i></a>
             {{-- Pagination --}}
             <div class="d-flex justify-content-end">
                 {{ $customers->links() }}

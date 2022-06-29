@@ -17,7 +17,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::where('role', 'customer')->orderBy('created_at','asc')->paginate(3);;
+        $customers = User::where('role', 'customer')->orderBy('created_at','asc')->paginate(5);;
 
         return view('dashboards.admin.customer', compact('customers'));
     }

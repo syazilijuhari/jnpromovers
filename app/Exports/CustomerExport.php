@@ -23,7 +23,7 @@ class CustomerExport implements FromQuery,WithHeadings
     public function headings(): array
     {
         // TODO: Implement headings() method.
-        return ["Id", "Name", "Role", "Phone No", "Email"];
+        return ["ID", "Name", "Role", "Phone No", "Email", "Created At", "Updated At"];
     }
 
     public function map($customer): array
