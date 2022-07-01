@@ -20,7 +20,7 @@
                     <div class="form-group">
                         @csrf
                         <label for="title">Title</label>
-                        <input type="text" name="title" class="form-control">
+                        <input type="text" name="title" class="form-control" placeholder="Insert service/transportation title">
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="desc">Description</label>
-                        <input type="text" name="desc" class="form-control">
+                        <input type="text" name="desc" class="form-control" placeholder="Insert description">
                     </div>
                     <input type="submit" value="Create Service" class="btn btn-success float-right">
                 </div>
