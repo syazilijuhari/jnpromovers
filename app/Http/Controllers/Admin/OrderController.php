@@ -14,14 +14,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
-    public function assign(Request $request, $order) {
+    public function assign(Request $request, $order_id) {
 
         $employee = User::whereIn('user_id', $request->employee)->pluck('phone')->implode(',');
+        $order = Order::find($order_id);
 
         $response = Http::post('https://terminal.adasms.com/api/v1/send', [
             '_token' => getenv("ADASMS_TOKEN"),
             'phone' => $employee,
-            'message' => 'You received an order' . $request->order_id,
+            'message' => 'You received an order from JN Pro Movers Order ID: ' . $order->order_id . ' Address From: ' . $order->address_from . ' Address To: ' . $order->address_to,
         ]);
 
         if ($response['success']) {
