@@ -28,12 +28,11 @@ class SendEmailController extends Controller
         );
 
         $input = $request->all();
-        //Mail::to('cilipepperr@gmail.com')->send(new SendMail($data));
         Mail::send('email', $data, function($message) use ($request){
 
             $message->from($request->email);
 
-            $message->to('cilipepperrr@gmail.com', 'Admin')->subject('New Customer Enquiry');
+            $message->to('jnpromovers@gmail.com', 'Admin')->subject('New Customer Enquiry');
 
         });
         return back()->with('success', 'Thanks for contacting us!');

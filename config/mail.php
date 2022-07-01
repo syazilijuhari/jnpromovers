@@ -92,7 +92,7 @@ return [
     */
 
     'from' => [
-        'address' => 'cilipepperrr@gmail.com', 'name' => 'JN Pro Movers'
+        'address' => 'jnpromovers@gmail.com', 'name' => 'JN Pro Movers'
     ],
 
     /*
