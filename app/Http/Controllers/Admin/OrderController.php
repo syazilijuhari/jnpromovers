@@ -22,7 +22,7 @@ class OrderController extends Controller
         $response = Http::post('https://terminal.adasms.com/api/v1/send', [
             '_token' => getenv("ADASMS_TOKEN"),
             'phone' => $employee,
-            'message' => 'You received an order from JN Pro Movers Order ID: ' . $order->order_id . ' Address From: ' . $order->address_from . ' Address To: ' . $order->address_to,
+            'message' => 'You received an order from JN Pro Movers Order ID: ' . $order->order_id . ' Package: ' . $order->package . ' Transportation: ' . $order->vehicle_type .' Address To: ' . $order->address_from . ' Address To: ' . $order->address_to . ' Date: ' . $order->booking_datetime,
         ]);
 
         if ($response['success']) {
