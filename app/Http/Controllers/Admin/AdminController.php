@@ -29,22 +29,22 @@ class AdminController extends Controller
         $totalService = DB::table('services')->count('id');
         $totalOrder = DB::table('order')->count('order_id');
 
-//        $orderPerMonth = DB::table('order')
-//            ->selectRaw('COUNT(order_id) as cnt, DATE_FORMAT(created_at, "%d/%m/%Y") fdate')
-//            ->whereDate('created_at', '>=', Carbon::now()->subDays(6))
-//            ->orderByRaw('STR_TO_DATE(fdate, "%d/%m/%Y")', 'ASC')
-//            ->groupBy('fdate')->get()
-//            ->mapWithKeys(function ($item) {
-//
-//                return [$item->fdate => $item->cnt];
-//            });
-//
-//        $joinDateAds = collect(CarbonPeriod::create(now()->subDays(6), now()))->mapWithKeys(function ($date) {
-//            return [$date->format('d/m/Y') => 0];
-//        })->merge($joinDateDBAds)->sortKeys();
+        $orderDB = DB::table('order')
+            ->selectRaw('COUNT(order_id) as cnt, DATE_FORMAT(created_at, "%d/%m/%Y") fdate')
+            ->whereDate('created_at', '>=', Carbon::now()->subDays(6))
+            ->orderByRaw('STR_TO_DATE(fdate, "%d/%m/%Y")', 'ASC')
+            ->groupBy('fdate')->get()
+            ->mapWithKeys(function ($item) {
+
+                return [$item->fdate => $item->cnt];
+            });
+
+        $orderDate = collect(CarbonPeriod::create(now()->subDays(6), now()))->mapWithKeys(function ($date) {
+            return [$date->format('d/m/Y') => 0];
+        })->merge($orderDB)->sortKeys();
 
 
-        return view('dashboards.admin.index', compact('customers', 'employees', 'services', 'orders', 'totalCustomer', 'totalEmployee', 'totalService', 'totalOrder'));
+        return view('dashboards.admin.index', compact('customers', 'employees', 'services', 'orders', 'totalCustomer', 'totalEmployee', 'totalService', 'totalOrder','orderDate'));
     }
 
 }
