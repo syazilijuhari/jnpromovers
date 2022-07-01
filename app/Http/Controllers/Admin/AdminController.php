@@ -29,8 +29,9 @@ class AdminController extends Controller
         $totalService = DB::table('services')->count('id');
         $totalOrder = DB::table('order')->count('order_id');
 
+/*
         $orderDB = DB::table('order')
-            ->selectRaw('COUNT(order_id) as cnt, DATE_FORMAT(created_at, "%d/%m/%Y") fdate')
+            ->selectRaw('COUNT(`order_id`) as cnt, DATE_FORMAT(created_at, "%d/%m/%Y") as fdate')
             ->whereDate('created_at', '>=', Carbon::now()->subDays(6))
             ->orderByRaw('STR_TO_DATE(fdate, "%d/%m/%Y")', 'ASC')
             ->groupBy('fdate')->get()
@@ -38,6 +39,8 @@ class AdminController extends Controller
 
                 return [$item->fdate => $item->cnt];
             });
+*/
+	$orderDB = collect(DB::select(DB::raw('select COUNT(`order_id`) as cnt, DATE_FORMAT(created_at, "%d/%m/%Y") as fdate from `order` where date(`created_at`) >= 2022-06-25 group by `fdate` order by STR_TO_DATE(fdate, "%d/%m/%Y")')))->mapWithKeys(function ($item) { return [$item->fdate => $item->cnt]; });
 
         $orderDate = collect(CarbonPeriod::create(now()->subDays(6), now()))->mapWithKeys(function ($date) {
             return [$date->format('d/m/Y') => 0];
