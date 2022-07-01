@@ -9,22 +9,35 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
     public function assign(Request $request, $order) {
 
-        $employees_id = $request->only('employee');
-        $employees = User::whereIn('user_id', Arr::flatten($employees_id))->get();
-        dd($employees);
+        $employee = User::whereIn('user_id', $request->employee)->pluck('phone')->implode(',');
+
+        $response = Http::post('https://terminal.adasms.com/api/v1/send', [
+            '_token' => getenv("ADASMS_TOKEN"),
+            'phone' => $employee,
+            'message' => 'You received an order' . $request->order_id,
+        ]);
+
+        if ($response['success']) {
+            $msg = "Message sent successfully";
+            return redirect()->back()->with('success', $msg);
+        }
+        else {
+            $msg = $response['explain'];
+            return redirect()->back()->with('failed', $msg);
+        }
 
 //        1. $employees = array user.
 //        2. create empty array = $phones.
 //        3. foreach list $employees and masukkan no telefon ke array $phones.
 //        4. implode $phones dengan comma (so that dia array tu akan cantum bersama ',' utk jadikan string. eg: '011124,0123123,12321903')
 //        5. send API
-
     }
 
     /**
@@ -45,11 +58,8 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-//        $response = Http::post('https://terminal.adasms.com/api/v1/send', [
-//            '_token' => getenv("ADASMS_TOKEN"),
-//            'phone' => '6' . $request->phone,
-//            'message' => 'You received an order' . $request->order_id,
-//        ]);
+
+
 
     }
 

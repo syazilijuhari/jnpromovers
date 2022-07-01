@@ -61,7 +61,7 @@
         <div class="card">
             <div class="card-header border-0 bg-cyan m-0">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">Sales Report</h3>
+                    <h3 class="card-title mb-0">Orders Report</h3>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                             <div class=""></div>
                         </div>
                     </div>
-                    <canvas id="ads" height="400" style="display: block; height: 200px; width: 402px;" width="804"
+                    <canvas id="sale" height="400" style="display: block; height: 200px; width: 402px;" width="804"
                             class="chartjs-render-monitor"></canvas>
                 </div>
             </div>
@@ -90,68 +90,64 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" defer>
     </script>
 
-    {{--    <script type="text/javascript">--}}
-    {{--        $(document).ready(function () {--}}
-    {{--            /*--}}
-    {{--                ===========--}}
-    {{--                LINE CHART--}}
-    {{--                ===========--}}
-    {{--                */--}}
-    {{--            const applicationChartCanvas = $('#ads').get(0).getContext('2d')--}}
-    {{--            var areaChartOptions = {--}}
-    {{--                maintainAspectRatio: false,--}}
-    {{--                responsive: true,--}}
-    {{--                elements: {--}}
-    {{--                    line: {--}}
-    {{--                        tension: 0.4--}}
-    {{--                    }--}}
-    {{--                },--}}
-    {{--                scales: {--}}
-    {{--                    x: {--}}
-    {{--                        stacked: true,--}}
-    {{--                        title: {--}}
-    {{--                            display: true,--}}
-    {{--                            text: "Date"--}}
-    {{--                        },--}}
-    {{--                        grid: {--}}
-    {{--                            display: false,--}}
-    {{--                        }--}}
-    {{--                    },--}}
-    {{--                    y: {--}}
-    {{--                        stacked: true,--}}
-    {{--                        title: {--}}
-    {{--                            display: true,--}}
-    {{--                            text: "Total Joined"--}}
-    {{--                        },--}}
-    {{--                        grid: {--}}
-    {{--                            display: false,--}}
-    {{--                        }--}}
-    {{--                    }--}}
-    {{--                }--}}
-    {{--            }--}}
-    {{--            new Chart(applicationChartCanvas, {--}}
-    {{--                type: 'bar',--}}
-    {{--                data: {--}}
-    {{--                    labels: {!! json_encode($joinDateAds->keys()) !!},--}}
-    {{--                    datasets: [--}}
-    {{--                        {--}}
-    {{--                            label: 'Ads Received',--}}
-    {{--                            backgroundColor: '#ff6384',--}}
-    {{--                            borderColor: 'rgba(210, 214, 222, 1)',--}}
-    {{--                            fill: true,--}}
-    {{--                            data: {!! json_encode($joinDateAds->values()) !!}--}}
-    {{--                        },--}}
-    {{--                        {--}}
-    {{--                            label: 'Event Received',--}}
-    {{--                            backgroundColor: '#4bc0c0',--}}
-    {{--                            borderColor: 'rgba(210, 214, 222, 1)',--}}
-    {{--                            fill: true,--}}
-    {{--                            data: {!! json_encode($joinDateEvent->values()) !!}--}}
-    {{--                        },--}}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                /*
+                    ===========
+                    LINE CHART
+                    ===========
+                    */
+                const applicationChartCanvas = $('#sale').get(0).getContext('2d')
+                var areaChartOptions = {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    elements: {
+                        line: {
+                            tension: 0.4
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: "Month"
+                            },
+                            grid: {
+                                display: false,
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: "Total Orders"
+                            },
+                            grid: {
+                                display: false,
+                            }
+                        }
+                    }
+                }
+                new Chart(applicationChartCanvas, {
+                    type: 'bar',
+                    data: {
+                        {{--labels: {!! json_encode($joinDateAds->keys()) !!},--}}
+                        labels: ["January", "February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                        datasets: [
+                            {
+                                label: 'Order Received',
+                                backgroundColor: '#4bc0c0',
+                                borderColor: 'rgba(210, 214, 222, 1)',
+                                fill: true,
+                                {{--data: {!! json_encode($totalOrder->values()) !!},--}}
+                                // data: 100
+                            },
 
-    {{--                    ]--}}
-    {{--                },--}}
-    {{--                options: areaChartOptions--}}
-    {{--            });--}}
-    {{--        });--}}
-    {{--    </script>--}}
+                        ]
+                    },
+                    options: areaChartOptions
+                });
+            });
+        </script>
+@endpush
