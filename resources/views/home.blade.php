@@ -55,7 +55,7 @@
                         <blockquote>
                             <h2 class="card-title text-md-left" style="font-size: 1.5rem">Transport</h2>
                             <p class="card-text text-sm-left">
-                                We supply 1 or 3 to lorry with manpower to move the customer's furnitures and other stuff for local move within Peninsular Malaysia
+                                We supply 1 or 3 ton lorry with manpower to move the customer's furnitures and other stuff for local move within Peninsular Malaysia
                             </p>
                         </blockquote>
                     </div>
