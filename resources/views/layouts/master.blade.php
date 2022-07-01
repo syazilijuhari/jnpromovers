@@ -88,9 +88,9 @@
     <!-- Chartjs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
-    <!-- Google Maps API -->
+    <!-- Google Maps API
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_Yp6qQiS8G8dQoxeYGol5PB7RBaHeh9s&libraries=places&callback=initMap" async defer>
-    </script>
+    </script>-->
 
 
     @stack('scripts')
