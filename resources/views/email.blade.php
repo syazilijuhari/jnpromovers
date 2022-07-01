@@ -7,7 +7,7 @@
 </head>
 <body>
 <p>Hi, This is {{ $name }} ({{$email}})</p>
-<p>I have some query like {!! $mesej !!}.</p>
+<p>I have some query like: {!! $mesej !!}.</p>
 <p>It would be appreciative, if you gone through this feedback.</p>
 </body>
 </html>
