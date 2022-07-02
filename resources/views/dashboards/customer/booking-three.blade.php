@@ -16,7 +16,11 @@
                 </div><br/>
             @endif
             <section id="services">
-                <h3 style="font-weight: 700">Additional Services</h3>
+                <h3 style="font-weight: 700">Additional Services<span><a id="popover" type="button" class="btn"
+                                                                         data-bs-container="body" data-bs-toggle="popover"
+                                                                         data-bs-placement="right" data-bs-trigger="hover"
+                                                                         data-bs-content="Dismantle: RM150, Wrapping: RM150, Boxes: RM20, Manpower: RM50"><i
+                                class="fas fa-info-circle"></i></a></span></h3>
                 <div class="content booking-services">
                     <div class="container text-center mt-4 mb-3">
                         <div class="row gx-4">
@@ -107,6 +111,12 @@
 @push('scripts')
 
     <script>
+
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        });
+
         $(document).ready(function () {
             calculate();
         });

@@ -73,6 +73,11 @@
                 <div class="d-flex">
                     <div class="mr-3">
                         <div class="input-group mb-3">
+                            <a id="popover" type="button" class="btn"
+                               data-bs-container="body" data-bs-toggle="popover"
+                               data-bs-placement="left" data-bs-trigger="hover"
+                               data-bs-content="Price rate: RM3/km"><i
+                                    class="fas fa-info-circle"></i></a>
                             <span class="input-group-text">RM</span>
                             <input type="text" class="form-control" id="price" name="price" value="{{$price}}" readonly style="background-color: white">
                         </div>
@@ -91,6 +96,12 @@
 @push('scripts')
 
     <script type="text/javascript">
+
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        });
+
         const sw = {lat: 0.8538205, lng: 98.7375747};
         const ne = {lat: 7.6667327, lng: 119.5833462};
 

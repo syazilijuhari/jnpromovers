@@ -16,7 +16,12 @@
                 </div><br/>
             @endif
             <section id="package">
-                <h3 style="font-weight: 700">Choose Package</h3>
+                <h3 style="font-weight: 700">Choose Package<span><a id="popover" type="button" class="btn"
+                                                                     data-bs-container="body" data-bs-toggle="popover"
+                                                                     data-bs-placement="right" data-bs-trigger="hover"
+                                                                     data-bs-content="The price for each package is based on the chosen transportation"><i
+                                class="fas fa-info-circle"></i></a></span></h3>
+
 
                 <div class="content booking-package">
                     <div class="container text-center mt-4 mb-3">
@@ -96,7 +101,13 @@
             <section id="actions">
                 <div class="d-flex align-content-end justify-content-end">
                     <div class="mr-3">
+
                         <div class="input-group mb-3">
+                            <a id="popover" type="button" class="btn"
+                                     data-bs-container="body" data-bs-toggle="popover"
+                                     data-bs-placement="left" data-bs-trigger="hover"
+                                     data-bs-content="The prices are calculated based on the chosen package and transportation"><i
+                                        class="fas fa-info-circle"></i></a>
                             <span class="input-group-text">RM</span>
                             <input type="text" class="form-control" id="price" name="price"
                                    value="{{$order && $order->price}}" readonly style="background-color: white">
@@ -115,6 +126,11 @@
 @push('scripts')
 
     <script>
+
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        });
 
         $(document).ready(function () {
             calculate();

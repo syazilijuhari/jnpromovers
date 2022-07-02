@@ -10,17 +10,19 @@
                     <div class="landing-header d-flex flex-column justify-content-center">
                         <p class="mb-0" data-aos="fade-right">
                             JN Pro Movers
-                        </p>
+                            <span><img src="{{ asset('img/lorry-lg.png') }}" alt="lorry logo" class="img-fluid" style="float: right;width: 210px"></span>
+                       </p>
+
                         <small data-aos="fade-right">
                             We provide the best moving services for home and offices to keep the moving more easier and safely transport your items to your desire location.
                         </small>
-
                         <div class="row ml-1 mt-5">
                             <button class="landing-btn" data-aos="fade-right">
                                 <i class="fas fa-angle-double-down"></i>
                                 &nbsp;
                                 <a href="#services">See our services</a>
                             </button>
+
                         </div>
                     </div>
                 </div>
